@@ -1,0 +1,26 @@
+{
+  "name": "chatbot-tugas-akhir",
+  "version": "1.0.0",
+  "description": "backend-chatbot",
+  "main": "server.js",
+  "scripts": {
+    "test": "Syauqi Nur Hibatullah"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syauqisnh/chatbot-tugas-akhir.git"
+  },
+  "keywords": [
+    "TASyauqi"
+  ],
+  "author": "Syauqi Nur Hibatullah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syauqisnh/chatbot-tugas-akhir/issues"
+  },
+  "homepage": "https://github.com/syauqisnh/chatbot-tugas-akhir#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
