@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "chatbot_database",
+    "database": "webprofile_builder_api_tugas_akhir",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

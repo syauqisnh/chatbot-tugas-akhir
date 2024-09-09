@@ -1,13 +1,13 @@
 const db = require("../models");
 const { v4: uuidv4 } = require("uuid");
-const chatbot = db.chatbot;
+const data_message = db.data_message;
 
-const put_chatbot = async (req, res) => {
+const put_message = async (req, res) => {
   try {
-    const { chatbot_uuid } = req.params;
-    const { chatbot_question, chatbot_answer } = req.body;
+    const { message_uuid } = req.params;
+    const { message_question, message_answer } = req.body;
 
-    const chatDetail = await chatbot.findOne({ where: { chatbot_uuid } });
+    const chatDetail = await data_message.findOne({ where: { message_uuid } });
 
     if (!chatDetail) {
       return res.status(404).json({
@@ -16,12 +16,12 @@ const put_chatbot = async (req, res) => {
       });
     }
 
-    await chatbot.update(
+    await data_message.update(
       {
-        chatbot_question: chatbot_question,
-        chatbot_answer: chatbot_answer,
+        message_question: message_question,
+        message_answer: message_answer,
       },
-      { where: { chatbot_uuid } }
+      { where: { message_uuid } }
     );
 
     res.status(200).json({
@@ -37,15 +37,15 @@ const put_chatbot = async (req, res) => {
   }
 };
 
-const delete_chatbot = async (req, res) => {
+const delete_message = async (req, res) => {
   try {
-    const { chatbot_uuid } = req.params;
+    const { message_uuid } = req.params;
 
-    const delete_chatbot = await chatbot.findOne({
-      where: { chatbot_uuid },
+    const delete_message = await data_message.findOne({
+      where: { message_uuid },
     });
 
-    if (!delete_chatbot) {
+    if (!delete_message) {
       return res.status(404).json({
         success: false,
         message: "Gagal menghapus data: Data tidak ditemukan",
@@ -53,7 +53,7 @@ const delete_chatbot = async (req, res) => {
       });
     }
 
-    await delete_chatbot.update({ deletedAt: new Date() });
+    await delete_message.update({ message_delete_at: new Date() });
 
     res.json({
       success: true,
@@ -69,12 +69,12 @@ const delete_chatbot = async (req, res) => {
   }
 };
 
-const get_detail_chatbot = async (req, res) => {
+const get_detail_message = async (req, res) => {
   try {
-    const { chatbot_uuid } = req.params;
+    const { message_uuid } = req.params;
 
-    const chatDetail = await chatbot.findOne({
-      where: { chatbot_uuid, deletedAt: null },
+    const chatDetail = await data_message.findOne({
+      where: { message_uuid, message_delete_at: null },
     });
 
     if (!chatDetail) {
@@ -101,13 +101,13 @@ const get_detail_chatbot = async (req, res) => {
   }
 };
 
-const get_all_chatbot = async (req, res) => {
+const get_all_message = async (req, res) => {
   try {
     const {
       limit = null,
       page = null,
       keyword = "",
-      order = { chatbot_id: "desc" },
+      order = { message_id: "desc" },
     } = req.query;
 
     let offset = limit && page ? (page - 1) * limit : 0;
@@ -116,7 +116,7 @@ const get_all_chatbot = async (req, res) => {
       order[orderField]?.toLowerCase() === "asc" ? "ASC" : "DESC";
 
     const whereClause = {
-      deletedAt: null,
+      message_delete_at: null,
     };
 
     if (keyword) {
@@ -125,12 +125,12 @@ const get_all_chatbot = async (req, res) => {
       };
       offset = 0;
 
-      whereClause.chatbot_question = whereClause.chatbot_question
-        ? { [Sequelize.Op.and]: [whereClause.chatbot_question, keywordClause] }
+      whereClause.message_question = whereClause.message_question
+        ? { [Sequelize.Op.and]: [whereClause.message_question, keywordClause] }
         : keywordClause;
     }
 
-    const data = await chatbot.findAndCountAll({
+    const data = await data_message.findAndCountAll({
       where: whereClause,
       order: [[orderField, orderDirection]],
       limit: limit ? parseInt(limit) : null,
@@ -142,10 +142,10 @@ const get_all_chatbot = async (req, res) => {
     const result = {
       success: true,
       message: "Sukses mendapatkan data",
-      data: data.rows.map((chatbot) => ({
-        chatbot_uuid: chatbot.chatbot_uuid,
-        chatbot_question: chatbot.chatbot_question,
-        chatbot_answer: chatbot.chatbot_answer,
+      data: data.rows.map((message) => ({
+        message_uuid: message.message_uuid,
+        message_question: message.message_question,
+        message_answer: message.message_answer,
       })),
       pages: {
         total: data.count,
@@ -182,17 +182,17 @@ const get_all_chatbot = async (req, res) => {
 
     res.status(200).json(result);
   } catch (error) {
-    console.error("Terjadi kesalahan saat mengambil data chatbot:", error);
+    console.error("Terjadi kesalahan saat mengambil data message:", error);
     res.status(500).json({
       success: false,
-      message: "Terjadi kesalahan saat mengambil data chatbot",
+      message: "Terjadi kesalahan saat mengambil data message",
     });
   }
 };
 
 module.exports = {
-  put_chatbot,
-  delete_chatbot,
-  get_detail_chatbot,
-  get_all_chatbot,
+  put_message,
+  delete_message,
+  get_detail_message,
+  get_all_message,
 };

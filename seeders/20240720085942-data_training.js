@@ -3,7 +3,7 @@
 const { v4: uuidv4 } = require("uuid");
 
 const questionData = {
-  "sayHallo": [
+  sayHallo: [
     "halo haloo",
     "helo heloo",
     "hallo halloo",
@@ -20,19 +20,39 @@ const questionData = {
     "halllo",
     "heloo",
   ],
-  "Pagi": ["selamt pagi", "slamat pagi"],
+  Pagi: ["selamt pagi", "slamat pagi"],
+  Bertanya: ["Saya ingin bertanya?", "nanya?"],
+  WebBuilder: [
+    "apa itu web builder company profile",
+    "apa itu website builder?",
+    "apa itu website company profile?",
+    "jelaskan web builder company profile",
+    "jelaskan tentang web builder company profile",
+    "apa itu company profile?",
+    "apa itu website company profile?",
+    "apa itu web company profile?",
+    "web builder company profile",
+    "Ini website tentang apa?",
+  ],
 };
 
 const answerData = {
-  "sayHallo": [
+  sayHallo: [
     "Hai! Terima kasih telah menghubungi kami. Ada yang bisa saya bantu?",
     "Halo! Selamat datang di aplikasi kami. Apakah ada yang ingin Anda tanyakan?",
   ],
-  "Pagi": [
+  Pagi: [
     "Selamat pagi! Terima kasih telah menghubungi kami. Ada yang bisa saya bantu?",
     "Selamat pagi! Apakah ada yang ingin di tanyakan?",
   ],
-  "None": [
+  Bertanya: [
+    "Silakan bertanya, ada yang bisa saya bantu?",
+    "Tentu, silakan ajukan pertanyaan Anda.",
+  ],
+  WebBuilder: [
+    "Web builder company profile adalah layanan yang menyediakan pembuatan dan perancangan situs web khusus untuk profil perusahaan. Layanan ini biasanya menawarkan berbagai fitur dan template yang dapat disesuaikan dengan kebutuhan dan identitas merek perusahaan. Tujuan utamanya adalah untuk menciptakan situs web yang menarik dan informatif yang dapat menggambarkan perusahaan dengan baik kepada pengunjung. Layanan ini mencakup desain, pengembangan, dan pengelolaan situs web serta integrasi dengan platform lain seperti media sosial."
+  ],
+  None: [
     "Maaf, saya belum mengerti maksud Anda. Mungkin Anda bisa tanyakan kepada admin.",
   ],
 };
@@ -52,7 +72,6 @@ module.exports = {
         training_answer: JSON.stringify(answers),
         createdAt: new Date(),
         updatedAt: new Date(),
-        deletedAt: null,
       });
     }
 

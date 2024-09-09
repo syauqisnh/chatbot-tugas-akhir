@@ -2,32 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('chatbot', {
-      chatbot_id: {
+    await queryInterface.createTable('data_message', {
+      message_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      chatbot_uuid: {
+      message_uuid: {
         type: Sequelize.STRING
       },
-      chatbot_question: {
+      message_question: {
         type: Sequelize.STRING
       },
-      chatbot_answer: {
+      message_answer: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      message_create_at: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       },
-      updatedAt: {
+      message_update_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      deletedAt: {
+      message_delete_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
@@ -36,6 +36,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('chatbot');
+    await queryInterface.dropTable('data_message');
   }
 };
+

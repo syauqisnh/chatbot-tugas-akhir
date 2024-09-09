@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     training_question: DataTypes.TEXT,
     training_answer: DataTypes.TEXT,
     updatedAt: DataTypes.DATE,
-    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'data_training',
