@@ -4,7 +4,7 @@ const { trainNLPModel } = require('./train-model');
 const cors = require('cors');
 
 const app = express();
-const port = 5000;
+const port = 5800;
 
 app.use(express.json());
 
