@@ -2,9 +2,10 @@ const express = require('express');
 const route = require('./routes/route');
 const { trainNLPModel } = require('./train-model');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
-const port = 5800;
+const port = process.env.PORT;
 
 app.use(express.json());
 
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
 
 app.use(cors({ 
   credentials: true,
-  origin: 'http://localhost:5173' 
+  origin: process.env.FRONTEND_URL
 }));
 
 app.use(route);
